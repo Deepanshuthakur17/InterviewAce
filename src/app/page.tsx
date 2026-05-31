@@ -125,108 +125,69 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
+    <div className="bg-[#0a0a14] text-slate-100 transition-colors duration-300">
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 lg:py-32">
+      {/* Premium Hero Section */}
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden py-20 bg-linear-to-br from-[#0a0a14] via-[#0f113a] to-[#1a0b2e]">
         <ShaderGradientBackground />
-        {/* Subtle overlay for text readability (only in light mode) */}
-        <div className="absolute inset-0 bg-slate-50/70 dark:bg-transparent" />
+        {/* Subtle noise overlay */}
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none" />
 
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-            {/* Hero Text */}
-            <div className="text-center lg:col-span-7 lg:text-left space-y-6">
-              <div className="inline-flex items-center space-x-2 rounded-full bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-900/30">
-                <Sparkles className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-                <span>Next-Gen AI Mock Interview Platform</span>
-              </div>
+        <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
 
-              <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl leading-tight">
-                Ace Your Tech & HR Interviews with{' '}
-                <span className="bg-linear-to-r from-orange-500 via-rose-500 to-violet-500 bg-clip-text text-transparent dark:from-orange-400 dark:via-rose-400 dark:to-violet-400 drop-shadow-sm">
-                  Instant AI Feedback
-                </span>
-              </h1>
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="inline-flex items-center space-x-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 backdrop-blur-md mb-8"
+          >
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-sm font-medium text-indigo-100">Now with realtime AI feedback</span>
+          </motion.div>
 
-              <p className="mx-auto max-w-2xl text-lg text-slate-600 dark:text-slate-300 lg:mx-0">
-                Practice realistic technical and behavioral interviews. Receive instant communication, confidence, and technical scoring, custom keypoints, and step-by-step improvement guides.
-              </p>
+          {/* Typography / Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+            className="font-playfair text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight text-white mb-6"
+          >
+            Interviews that <br />
+            <span className="italic text-transparent bg-clip-text bg-linear-to-r from-blue-300 via-indigo-200 to-purple-300">actually land offers.</span>
+          </motion.h1>
 
-              <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-                <Link
-                  href={user ? "/library" : "/auth?tab=signup"}
-                  className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-indigo-500/20 hover:bg-indigo-500 hover:shadow-indigo-500/30 dark:bg-indigo-500 dark:hover:bg-indigo-400 transition-all duration-200"
-                >
-                  <span>Start Free Practice</span>
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-                <Link
-                  href="/library"
-                  className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-base font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 transition-all"
-                >
-                  <Play className="mr-2 h-4 w-4 text-indigo-600 dark:text-indigo-400 fill-indigo-600 dark:fill-indigo-400" />
-                  <span>Browse Tracks</span>
-                </Link>
-              </div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="mx-auto max-w-2xl text-lg md:text-xl text-slate-300 font-light mb-12 leading-relaxed"
+          >
+            A premium mock interview tool for engineers who care about clarity.
+            Capture skills, practice dynamically, and turn feedback into your next big role.
+          </motion.p>
 
-              {/* Stats badges */}
-              <div className="grid grid-cols-3 gap-4 pt-8 border-t border-slate-200/60 dark:border-slate-800/60 max-w-md mx-auto lg:mx-0">
-                <div>
-                  <p className="text-2xl font-bold text-slate-900 dark:text-white">94%</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Placement Rate</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-slate-900 dark:text-white">15k+</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Interviews Analyzed</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-slate-900 dark:text-white">35+</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Specialized Tracks</p>
-                </div>
-              </div>
-            </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
+          >
+            <Link
+              href={user ? "/library" : "/auth?tab=signup"}
+              className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-sm font-semibold text-slate-900 shadow-xl hover:scale-105 transition-all duration-300 hover:shadow-indigo-500/25"
+            >
+              <span>Start practicing</span>
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+            <Link
+              href="/auth?tab=login"
+              className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-white backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
+            >
+              <span>I have an account</span>
+            </Link>
+          </motion.div>
 
-            {/* Hero Image / Animated Demo */}
-            <div className="lg:col-span-5 relative">
-              <div className="absolute -inset-1 rounded-2xl bg-linear-to-tr from-indigo-500 to-violet-500 opacity-30 blur-xl dark:opacity-20" />
-              <div className="relative rounded-2xl border border-slate-200 bg-white p-2 shadow-2xl dark:border-slate-800 dark:bg-slate-900">
-                <img
-                  src="/images/hero-student.jpg"
-                  alt="Student preparing for interview with InterviewAce"
-                  className="rounded-xl w-full h-[400px] object-cover"
-                />
-
-                {/* Floating Feedback Card */}
-                <div className="absolute -bottom-6 -left-6 rounded-2xl border border-slate-100 bg-white/95 p-4 shadow-xl backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/95 max-w-[240px] animate-bounce-slow">
-                  <div className="flex items-center space-x-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 text-white">
-                      <Sparkles className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-slate-400">AI Score Report</p>
-                      <p className="text-base font-bold text-slate-900 dark:text-white">Overall: 88%</p>
-                    </div>
-                  </div>
-                  <div className="mt-3 space-y-1">
-                    <div className="flex justify-between text-[11px]">
-                      <span>Technical Accuracy</span>
-                      <span className="font-semibold text-emerald-600 dark:text-emerald-400">92%</span>
-                    </div>
-                    <div className="h-1.5 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
-                      <div className="h-full bg-emerald-500 rounded-full" style={{ width: '92%' }} />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating Track Badge */}
-                <div className="absolute -top-6 -right-4 rounded-2xl border border-slate-100 bg-white/95 px-4 py-3 shadow-xl backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/95 flex items-center space-x-2">
-                  <span className="flex h-2.5 w-2.5 rounded-full bg-indigo-500" />
-                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Next.js Developer Track</span>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

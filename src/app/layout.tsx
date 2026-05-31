@@ -1,10 +1,12 @@
 import { Providers } from './providers';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
+import { PremiumCursor } from '@/components/PremiumCursor';
 import '@/app/globals.css';
-import { Outfit } from 'next/font/google';
+import { Outfit, Playfair_Display } from 'next/font/google';
 
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
 
 export const metadata = {
   title: 'InterviewAce | AI Mock Interviews',
@@ -19,8 +21,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={outfit.variable}>
-      <body suppressHydrationWarning className="flex min-h-screen flex-col font-sans bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300 antialiased selection:bg-indigo-500/30 selection:text-indigo-900 dark:selection:text-indigo-100">
+    <html lang="en" suppressHydrationWarning className={`${outfit.variable} ${playfair.variable}`}>
+      <body suppressHydrationWarning className="flex min-h-screen flex-col font-sans bg-[#0a0a14] dark:bg-[#0a0a14] text-slate-100 transition-colors duration-300 antialiased selection:bg-indigo-500/30 selection:text-indigo-100">
+        <PremiumCursor />
         <Providers>
           <Navbar />
           <main className="flex-1">
