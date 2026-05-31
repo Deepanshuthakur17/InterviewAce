@@ -11,8 +11,8 @@ export function PremiumCursor() {
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  // Smooth, buttery spring physics for the trail
-  const springConfig = { damping: 28, stiffness: 320, mass: 0.4 };
+  // Ultra-snappy, buttery spring physics for the trail to remove any slow/laggy feeling
+  const springConfig = { damping: 35, stiffness: 800, mass: 0.05 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
@@ -66,12 +66,13 @@ export function PremiumCursor() {
 
       {/* Sleek core Arrow */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-10000 text-white drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]"
+        className="fixed top-0 left-0 pointer-events-none z-[10000] text-white drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]"
         style={{
           x: mouseX,
           y: mouseY,
           translateX: '-2px',
           translateY: '-2px',
+          willChange: 'transform',
         }}
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,6 +102,7 @@ export function PremiumCursor() {
           backdropFilter: 'blur(3px)',
           // When hovered, drop the z-index to 0 (behind links/buttons) and elevate regular z-index to 9999
           zIndex: isHovered ? 0 : 9999,
+          willChange: 'transform, width, height',
         }}
       />
     </>
