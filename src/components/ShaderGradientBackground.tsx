@@ -1,10 +1,30 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ShaderGradient, ShaderGradientCanvas } from 'shadergradient';
 import * as reactSpring from '@react-spring/three';
 
 export function ShaderGradientBackground() {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const originalWarn = console.warn;
+      console.warn = (...args) => {
+        if (
+          args[0] &&
+          typeof args[0] === 'string' &&
+          (args[0].includes('THREE.Clock') || 
+           args[0].includes('dampingFactor') || 
+           args[0].includes('orbit-controls'))
+        ) {
+          return;
+        }
+        originalWarn(...args);
+      };
+      return () => {
+        console.warn = originalWarn;
+      };
+    }
+  }, []);
   const canvasProps = {
     importedFiber: reactSpring,
     style: {

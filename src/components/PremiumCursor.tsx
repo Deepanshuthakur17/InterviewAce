@@ -66,7 +66,7 @@ export function PremiumCursor() {
 
       {/* Sleek core Arrow */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[10000] text-white drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]"
+        className="fixed top-0 left-0 pointer-events-none z-10000 text-white drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]"
         style={{
           x: mouseX,
           y: mouseY,

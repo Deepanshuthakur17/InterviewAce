@@ -1,6 +1,10 @@
 import { PrismaClient } from '@prisma/client'
 import { Pool } from 'pg'
 import { PrismaPg } from '@prisma/adapter-pg'
+import dns from 'dns'
+
+// Force Node.js to prefer IPv4 over IPv6 when resolving database hostnames
+dns.setDefaultResultOrder('ipv4first')
 
 const connectionString = `${process.env.DATABASE_URL}`
 
