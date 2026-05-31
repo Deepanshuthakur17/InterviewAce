@@ -97,14 +97,14 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8 bg-[#0a0a14] transition-colors duration-300">
+    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8 bg-transparent transition-colors duration-300">
 
       {/* Header */}
       <div className="space-y-3.5 text-center sm:text-left">
-        <h1 className="text-4xl font-playfair font-normal tracking-tight text-white sm:text-5xl">
+        <h1 className="text-4xl font-playfair font-normal tracking-tight text-slate-900 dark:text-white sm:text-5xl">
           Profile & Preferences
         </h1>
-        <p className="max-w-2xl text-base text-slate-400 font-light">
+        <p className="max-w-2xl text-base text-slate-500 dark:text-slate-400 font-light">
           Manage your skills, adjust your interview preferences, and upload your resume to customize your AI practice environment.
         </p>
       </div>
@@ -115,13 +115,13 @@ export default function ProfilePage() {
         <div className="lg:col-span-8 space-y-6">
 
           {/* Profile Form (Formik) */}
-          <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 shadow-xl space-y-5">
+          <div className="rounded-2xl border border-slate-200 bg-white dark:border-white/10 dark:bg-white/5 backdrop-blur-md p-6 shadow-xl space-y-5">
             <div>
-              <h3 className="text-lg font-playfair font-normal text-white flex items-center space-x-2">
+              <h3 className="text-lg font-playfair font-normal text-slate-900 dark:text-white flex items-center space-x-2">
                 <User className="h-5 w-5 text-indigo-400" />
                 <span>Personal Information</span>
               </h3>
-              <p className="text-xs text-slate-400 mt-1">Update your account details and career objectives</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Update your account details and career objectives</p>
             </div>
 
             <Formik

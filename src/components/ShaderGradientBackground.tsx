@@ -1,29 +1,39 @@
+'use client';
+
 import React from 'react';
 import { ShaderGradient, ShaderGradientCanvas } from 'shadergradient';
 import * as reactSpring from '@react-spring/three';
 
 export function ShaderGradientBackground() {
+  const canvasProps = {
+    importedFiber: reactSpring,
+    style: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      pointerEvents: 'none',
+    }
+  } as any;
+
   return (
-    <div className="absolute inset-0 -z-10 h-full w-full pointer-events-none">
-      {/* @ts-ignore - shadergradient types often conflict with their own code generator */}
-      <ShaderGradientCanvas
-        style={{
-          position: 'absolute',
-          top: 0,
-          pointerEvents: 'none',
-        }}
-      >
+    <div className="absolute inset-0 z-0 h-full w-full pointer-events-none overflow-hidden bg-[#0a0a14]">
+      <ShaderGradientCanvas {...canvasProps}>
         <ShaderGradient
           {...({
             animate: "on",
-            brightness: 1.2,
+            axesHelper: "on",
+            bgColor1: "#000000",
+            bgColor2: "#000000",
+            brightness: 1.1,
             cAzimuthAngle: 180,
-            cDistance: 3.6,
-            cPolarAngle: 90,
+            cDistance: 3.9,
+            cPolarAngle: 115,
             cameraZoom: 1,
-            color1: "#ff5005",
-            color2: "#dbba95",
-            color3: "#d0bce1",
+            color1: "#6366f1",
+            color2: "#a855f7",
+            color3: "#0a0a14",
             destination: "onCanvas",
             embedMode: "off",
             envPreset: "city",
@@ -31,27 +41,27 @@ export function ShaderGradientBackground() {
             fov: 45,
             frameRate: 10,
             gizmoHelper: "hide",
-            grain: "on",
+            grain: "off",
             lightType: "3d",
             pixelDensity: 1,
-            positionX: -1.4,
-            positionY: 0,
+            positionX: -0.5,
+            positionY: 0.1,
             positionZ: 0,
             range: "disabled",
             rangeEnd: 40,
             rangeStart: 0,
             reflection: 0.1,
             rotationX: 0,
-            rotationY: 10,
-            rotationZ: 50,
+            rotationY: 0,
+            rotationZ: 235,
             shader: "defaults",
-            type: "plane",
-            uAmplitude: 1,
-            uDensity: 1.3,
+            type: "waterPlane",
+            uAmplitude: 0.3,
+            uDensity: 1.1,
             uFrequency: 5.5,
-            uSpeed: 0.4,
-            uStrength: 4,
-            uTime: 0,
+            uSpeed: 0.1,
+            uStrength: 2.4,
+            uTime: 0.2,
             wireframe: false,
           } as any)}
         />

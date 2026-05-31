@@ -21,11 +21,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       if (saved === 'light' || saved === 'dark') {
         setTheme(saved);
       } else {
-        // Default to dark mode for new visitors since the app is dark-mode focused
         setTheme('dark');
       }
     } catch (e) {
-      // Fallback if localStorage is blocked
       setTheme('dark');
     }
   }, []);

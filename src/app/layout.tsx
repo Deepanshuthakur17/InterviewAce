@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${outfit.variable} ${playfair.variable}`}>
-      <body suppressHydrationWarning className="flex min-h-screen flex-col font-sans bg-[#0a0a14] dark:bg-[#0a0a14] text-slate-100 transition-colors duration-300 antialiased selection:bg-indigo-500/30 selection:text-indigo-100">
+      <body suppressHydrationWarning className="flex min-h-screen flex-col font-sans bg-white dark:bg-[#0a0a14] text-slate-900 dark:text-slate-100 transition-colors duration-300 antialiased selection:bg-indigo-500/30 selection:text-indigo-100">
         <PremiumCursor />
         <Providers>
           <Navbar />

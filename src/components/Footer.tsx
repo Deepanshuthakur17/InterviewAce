@@ -4,7 +4,8 @@ import Link from 'next/link';
 
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { BrainCircuit, Mail, CheckCircle } from 'lucide-react';
+import { Mail, CheckCircle } from 'lucide-react';
+import { Logo } from './Logo';
 
 const NewsletterSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Required'),
@@ -17,10 +18,8 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-4 md:grid-cols-2">
           {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-tr from-indigo-600 to-violet-500 text-white shadow-md shadow-indigo-500/20">
-                <BrainCircuit className="h-6 w-6" />
-              </div>
+            <Link href="/" className="flex items-center space-x-2 group">
+              <Logo className="h-9 w-9 transition-transform group-hover:scale-105" />
               <span className="bg-linear-to-r from-slate-900 to-indigo-950 bg-clip-text text-xl font-bold tracking-tight text-transparent dark:from-white dark:to-indigo-200">
                 Interview<span className="text-indigo-600 dark:text-indigo-400">Ace</span>
               </span>
@@ -116,8 +115,8 @@ export const Footer: React.FC = () => {
                           name="email"
                           placeholder="Enter your email"
                           className={`w-full rounded-xl border bg-white py-2.5 pl-3 pr-10 text-sm outline-none transition-all dark:bg-slate-900 ${errors.email && touched.email
-                              ? 'border-rose-300 focus:border-rose-500 dark:border-rose-800/80 focus:ring-1 focus:ring-rose-500/20'
-                              : 'border-slate-200 focus:border-indigo-500 dark:border-slate-800 focus:ring-1 focus:ring-indigo-500/20'
+                            ? 'border-rose-300 focus:border-rose-500 dark:border-rose-800/80 focus:ring-1 focus:ring-rose-500/20'
+                            : 'border-slate-200 focus:border-indigo-500 dark:border-slate-800 focus:ring-1 focus:ring-indigo-500/20'
                             }`}
                         />
                         <button
@@ -141,7 +140,7 @@ export const Footer: React.FC = () => {
 
         <div className="mt-12 border-t border-slate-200 pt-8 text-center dark:border-slate-800">
           <p className="text-xs text-slate-400">
-            &copy; {new Date().getFullYear()} InterviewAce Inc. Built with React, Tailwind CSS, SWR, and Formik. All rights reserved.
+            &copy; {new Date().getFullYear()} InterviewAce. Built with React, Next.js, Tailwind CSS, SWR, and Formik. All rights reserved.
           </p>
         </div>
       </div>

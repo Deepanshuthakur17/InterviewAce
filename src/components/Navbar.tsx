@@ -6,9 +6,10 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from './AuthContext';
 import { useTheme } from './ThemeContext';
 import {
-  Menu, X, Sun, Moon, BrainCircuit, User, LogOut,
-  LayoutDashboard, BookOpen, GraduationCap, Award, Video
+  Menu, X, Sun, Moon, User, LogOut,
+  LayoutDashboard, BookOpen, GraduationCap, Video
 } from 'lucide-react';
+import { Logo } from './Logo';
 
 export const Navbar: React.FC = () => {
   const { user, logout } = useAuth();
@@ -36,14 +37,12 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-950/80 transition-all duration-300">
+    <nav className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-md dark:border-white/5 dark:bg-[#0a0a14]/80 transition-all duration-300">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-tr from-indigo-600 to-violet-500 text-white shadow-md shadow-indigo-500/20">
-              <BrainCircuit className="h-6 w-6" />
-            </div>
+          <Link href="/" className="flex items-center space-x-2 group">
+            <Logo className="h-9 w-9 transition-transform group-hover:scale-105" />
             <span className="bg-linear-to-r from-slate-900 to-indigo-950 bg-clip-text text-xl font-bold tracking-tight text-transparent dark:from-white dark:to-indigo-200">
               Interview<span className="text-indigo-600 dark:text-indigo-400">Ace</span>
             </span>
