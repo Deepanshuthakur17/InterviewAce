@@ -62,11 +62,11 @@ export function PremiumCursor() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: `* { cursor: none !important; }` }} />
+      <style dangerouslySetInnerHTML={{ __html: `@media (min-width: 768px) { * { cursor: none !important; } }` }} />
 
       {/* Sleek core Arrow */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-10000 text-white drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]"
+        className="hidden md:block fixed top-0 left-0 pointer-events-none z-10000 text-white drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]"
         style={{
           x: mouseX,
           y: mouseY,
@@ -88,7 +88,7 @@ export function PremiumCursor() {
 
       {/* Premium glowing aura trailing behind */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none rounded-full transition-all duration-300 ease-out"
+        className="hidden md:block fixed top-0 left-0 pointer-events-none rounded-full transition-all duration-300 ease-out"
         style={{
           x: smoothX,
           y: smoothY,

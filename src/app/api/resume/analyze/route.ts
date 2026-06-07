@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import pdf from 'pdf-parse';
 
 // Comprehensive list of technical skills to scan for
 const KNOWN_SKILLS = [
@@ -23,37 +24,9 @@ export async function POST(request: Request) {
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    // Parse the PDF text using pdf2json via a temporary worker script
-    const fs = require('fs');
-    const { execSync } = require('child_process');
-    const path = require('path');
-    const crypto = require('crypto');
-    
-    const uniqueId = crypto.randomUUID();
-    const tempPdfPath = path.join(process.cwd(), `temp_resume_${uniqueId}.pdf`);
-    const tempJsPath = path.join(process.cwd(), `temp_parser_${uniqueId}.cjs`);
-    
-    fs.writeFileSync(tempPdfPath, buffer);
-    
-    const script = `
-const fs = require('fs');
-const pdf = require('pdf-parse');
-pdf(fs.readFileSync('${tempPdfPath.replace(/\\/g, '\\\\')}')).then(data => {
-  console.log(JSON.stringify(data.text));
-}).catch(err => {
-  console.error(err);
-  process.exit(1);
-});
-    `;
-    
-    fs.writeFileSync(tempJsPath, script);
-    const output = execSync(`node temp_parser_${uniqueId}.cjs`, { cwd: process.cwd() }).toString();
-    const pdfText = JSON.parse(output);
-    
-    try { 
-      fs.unlinkSync(tempPdfPath); 
-      fs.unlinkSync(tempJsPath);
-    } catch (e) {}
+    // Parse the PDF text directly using pdf-parse
+    const data = await pdf(buffer);
+    const pdfText = data.text;
 
     // Extract skills by searching the text
     const extractedSkills = new Set<string>();

@@ -74,7 +74,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-8 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
 
       {/* Welcome Banner */}
       <div className="relative overflow-hidden rounded-3xl border border-indigo-100 bg-linear-to-tr from-indigo-900 via-indigo-950 to-slate-950 p-6 sm:p-8 text-white shadow-xl dark:border-slate-800">

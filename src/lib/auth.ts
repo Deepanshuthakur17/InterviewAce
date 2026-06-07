@@ -2,6 +2,7 @@ import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import prisma from "@/lib/prisma"
+import { hashPassword, verifyPassword } from "@/lib/hash"
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -16,7 +17,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-        if (!credentials?.email) return null;
+        if (!credentials?.email || !credentials?.password) return null;
 
         // Connect to Neon Database
         let user = await prisma.user.findUnique({
@@ -25,15 +26,33 @@ export const authOptions: NextAuthOptions = {
 
         // Auto-register user if they don't exist
         if (!user) {
+          const hashedPassword = hashPassword(credentials.password);
           user = await prisma.user.create({
             data: {
               email: credentials.email,
+              password: hashedPassword,
               name: credentials.email.split('@')[0], // Dynamic name from email
               avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(credentials.email.split('@')[0])}&background=random&color=fff&size=150`,
               skills: [],
               resumeParsedSkills: []
             }
           });
+        } else {
+          // If user exists, verify password
+          if (user.password) {
+            const isValid = verifyPassword(credentials.password, user.password);
+            if (!isValid) {
+              throw new Error("Invalid email or password");
+            }
+          } else {
+            // Legacy/Google user logging in with credentials for the first time
+            // We set their password securely on first credential login
+            const hashedPassword = hashPassword(credentials.password);
+            user = await prisma.user.update({
+              where: { id: user.id },
+              data: { password: hashedPassword }
+            });
+          }
         }
 
         return { id: user.id, name: user.name, email: user.email, image: user.avatar }

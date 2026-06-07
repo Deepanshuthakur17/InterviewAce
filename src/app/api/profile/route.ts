@@ -40,3 +40,32 @@ export async function PUT(request: Request) {
 
   return NextResponse.json(user);
 }
+
+export async function DELETE(request: Request) {
+  const session = await getServerSession(authOptions);
+  
+  if (!session?.user?.email) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { email: session.user.email }
+  });
+
+  if (!user) {
+    return NextResponse.json({ error: 'User not found' }, { status: 404 });
+  }
+
+  // Delete all related items first to maintain referential integrity
+  await prisma.historyItem.deleteMany({
+    where: { userId: user.id }
+  });
+
+  // Delete the user record
+  await prisma.user.delete({
+    where: { id: user.id }
+  });
+
+  return NextResponse.json({ success: true, message: 'Account deleted successfully' });
+}
+

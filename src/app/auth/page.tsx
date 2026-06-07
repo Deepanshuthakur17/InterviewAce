@@ -6,7 +6,7 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useAuth } from '@/components/AuthContext';
 import {
-  BrainCircuit, Mail, Lock, User, Sparkles, AlertCircle, CheckCircle2
+  BrainCircuit, Mail, Lock, User, Sparkles, AlertCircle, CheckCircle2, Eye, EyeOff
 } from 'lucide-react';
 
 const LoginSchema = Yup.object().shape({
@@ -33,6 +33,10 @@ function AuthContent() {
   const activeTab = searchParams.get('tab') === 'signup' ? 'signup' : 'login';
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
+  const [showSignupPassword, setShowSignupPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   useEffect(() => {
     // If already logged in, redirect to dashboard
@@ -121,12 +125,13 @@ function AuthContent() {
           {/* Formik Forms */}
           {activeTab === 'login' ? (
             <Formik
+              key="login-form"
               initialValues={{ email: '', password: '' }}
               validationSchema={LoginSchema}
               onSubmit={async (values, { setSubmitting }) => {
                 try {
                   setError(null);
-                  await login(values.email);
+                  await login(values.email, values.password);
                   setSuccess('Successfully logged in!');
                   setTimeout(() => navigate.push('/dashboard'), 800);
                 } catch (err: any) {
@@ -166,14 +171,23 @@ function AuthContent() {
                         <Lock className="h-5 w-5" />
                       </div>
                       <Field
-                        type="password"
+                        type={showLoginPassword ? "text" : "password"}
                         name="password"
                         placeholder="••••••••"
-                        className={`w-full rounded-xl border bg-slate-50/50 py-2.5 pl-10 pr-3 text-sm outline-none transition-all dark:bg-slate-950 ${errors.password && touched.password
+                        className={`w-full rounded-xl border bg-slate-50/50 py-2.5 pl-10 pr-10 text-sm outline-none transition-all dark:bg-slate-950 ${errors.password && touched.password
                             ? 'border-rose-300 focus:border-rose-500 dark:border-rose-800/80 focus:ring-1 focus:ring-rose-500/20'
                             : 'border-slate-200 focus:border-indigo-500 dark:border-slate-800 focus:ring-1 focus:ring-indigo-500/20'
                           }`}
                       />
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400">
+                        <button
+                          type="button"
+                          onClick={() => setShowLoginPassword(!showLoginPassword)}
+                          className="hover:text-slate-600 dark:hover:text-slate-300 focus:outline-none"
+                        >
+                          {showLoginPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                        </button>
+                      </div>
                     </div>
                     {errors.password && touched.password && (
                       <p className="text-xs text-rose-500 mt-1 pl-1">{errors.password}</p>
@@ -192,12 +206,13 @@ function AuthContent() {
             </Formik>
           ) : (
             <Formik
+              key="signup-form"
               initialValues={{ name: '', email: '', password: '', confirmPassword: '' }}
               validationSchema={SignupSchema}
               onSubmit={async (values, { setSubmitting }) => {
                 try {
                   setError(null);
-                  await signup(values.name, values.email);
+                  await signup(values.name, values.email, values.password);
                   setSuccess('Account created successfully!');
                   setTimeout(() => navigate.push('/dashboard'), 800);
                 } catch (err: any) {
@@ -258,14 +273,23 @@ function AuthContent() {
                         <Lock className="h-5 w-5" />
                       </div>
                       <Field
-                        type="password"
+                        type={showSignupPassword ? "text" : "password"}
                         name="password"
                         placeholder="••••••••"
-                        className={`w-full rounded-xl border bg-slate-50/50 py-2.5 pl-10 pr-3 text-sm outline-none transition-all dark:bg-slate-950 ${errors.password && touched.password
+                        className={`w-full rounded-xl border bg-slate-50/50 py-2.5 pl-10 pr-10 text-sm outline-none transition-all dark:bg-slate-950 ${errors.password && touched.password
                             ? 'border-rose-300 focus:border-rose-500 dark:border-rose-800/80 focus:ring-1 focus:ring-rose-500/20'
                             : 'border-slate-200 focus:border-indigo-500 dark:border-slate-800 focus:ring-1 focus:ring-indigo-500/20'
                           }`}
                       />
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400">
+                        <button
+                          type="button"
+                          onClick={() => setShowSignupPassword(!showSignupPassword)}
+                          className="hover:text-slate-600 dark:hover:text-slate-300 focus:outline-none"
+                        >
+                          {showSignupPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                        </button>
+                      </div>
                     </div>
                     {errors.password && touched.password && (
                       <p className="text-xs text-rose-500 mt-1 pl-1">{errors.password}</p>
@@ -279,14 +303,23 @@ function AuthContent() {
                         <Lock className="h-5 w-5" />
                       </div>
                       <Field
-                        type="password"
+                        type={showConfirmPassword ? "text" : "password"}
                         name="confirmPassword"
                         placeholder="••••••••"
-                        className={`w-full rounded-xl border bg-slate-50/50 py-2.5 pl-10 pr-3 text-sm outline-none transition-all dark:bg-slate-950 ${errors.confirmPassword && touched.confirmPassword
+                        className={`w-full rounded-xl border bg-slate-50/50 py-2.5 pl-10 pr-10 text-sm outline-none transition-all dark:bg-slate-950 ${errors.confirmPassword && touched.confirmPassword
                             ? 'border-rose-300 focus:border-rose-500 dark:border-rose-800/80 focus:ring-1 focus:ring-rose-500/20'
                             : 'border-slate-200 focus:border-indigo-500 dark:border-slate-800 focus:ring-1 focus:ring-indigo-500/20'
                           }`}
                       />
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400">
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          className="hover:text-slate-600 dark:hover:text-slate-300 focus:outline-none"
+                        >
+                          {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                        </button>
+                      </div>
                     </div>
                     {errors.confirmPassword && touched.confirmPassword && (
                       <p className="text-xs text-rose-500 mt-1 pl-1">{errors.confirmPassword}</p>

@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     domains: ['images.unsplash.com'],
   },
-  serverExternalPackages: ['pdf2json'],
+  serverExternalPackages: ['pdf-parse', 'pdf2json'],
 };
 
 export default nextConfig;
