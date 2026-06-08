@@ -62,6 +62,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt" as const,
   },
+  debug: true,
   callbacks: {
     async signIn({ user, account, profile }) {
       if (account?.provider === "google") {
