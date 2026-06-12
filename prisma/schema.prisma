@@ -16,6 +16,7 @@ model User {
   careerGoals        String?
   resumeName         String?
   resumeParsedSkills String[]
+  accountType        String? // "google" or "email"
 }
 
 model HistoryItem {

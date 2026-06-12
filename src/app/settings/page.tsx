@@ -195,7 +195,7 @@ export default function SettingsPage() {
                 
                 <div className="flex items-center space-x-5">
                   <div className="relative h-20 w-20 overflow-hidden rounded-full border border-slate-200 dark:border-slate-800">
-                    <img src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=random`} alt={user.name} className="h-full w-full object-cover" />
+                    <img src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=random`} referrerPolicy="no-referrer" alt={user.name} className="h-full w-full object-cover" />
                   </div>
                   <button className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
                     Change Avatar

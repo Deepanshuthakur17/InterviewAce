@@ -198,6 +198,11 @@ export default function ProfilePage() {
                       {errors.email && touched.email && (
                         <p className="text-xs text-rose-500 mt-1 pl-1">{errors.email}</p>
                       )}
+                      {profile.accountType && (
+                        <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1 pl-1">
+                          Authentication via: <span className="font-bold capitalize text-indigo-600 dark:text-indigo-400">{profile.accountType}</span>
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -206,7 +211,7 @@ export default function ProfilePage() {
                     <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Profile Picture</label>
                     <div className="flex items-center space-x-4">
                       {values.avatar ? (
-                        <img src={values.avatar} alt="Avatar Preview" className="h-12 w-12 rounded-full object-cover border border-slate-200 dark:border-slate-800" />
+                        <img src={values.avatar} alt="Avatar Preview" referrerPolicy="no-referrer" className="h-12 w-12 rounded-full object-cover border border-slate-200 dark:border-slate-800" />
                       ) : (
                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
                           <User className="h-6 w-6 text-slate-400" />

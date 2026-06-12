@@ -37,6 +37,7 @@ export interface UserProfile {
   };
   resumeName: string | null;
   resumeParsedSkills: string[];
+  accountType?: string | null;
 }
 
 export interface AnswerRecord {

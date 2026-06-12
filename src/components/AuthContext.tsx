@@ -7,6 +7,7 @@ interface AuthUser {
   email: string;
   avatar: string;
   token?: string;
+  accountType?: string;
 }
 
 interface AuthContextType {
@@ -28,6 +29,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     name: session.user.name || '',
     email: session.user.email || '',
     avatar: session.user.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user.name || session.user.email || 'U')}&background=random&color=fff&size=150`,
+    accountType: (session.user as any).accountType || '',
   } : null;
 
   const loading = status === 'loading';

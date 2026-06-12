@@ -98,6 +98,7 @@ export const Navbar: React.FC = () => {
                     <img
                       src={user.avatar}
                       alt={user.name}
+                      referrerPolicy="no-referrer"
                       className="h-8 w-8 rounded-full border border-slate-200 dark:border-slate-800 object-cover"
                     />
                     <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 max-w-[100px] truncate">
@@ -217,6 +218,7 @@ export const Navbar: React.FC = () => {
                     <img
                       src={user.avatar}
                       alt={user.name}
+                      referrerPolicy="no-referrer"
                       className="h-10 w-10 rounded-full object-cover border border-slate-200 dark:border-slate-800"
                     />
                     <div>

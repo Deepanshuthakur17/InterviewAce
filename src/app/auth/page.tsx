@@ -5,8 +5,9 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useAuth } from '@/components/AuthContext';
+import { Logo } from '@/components/Logo';
 import {
-  BrainCircuit, Mail, Lock, User, Sparkles, AlertCircle, CheckCircle2, Eye, EyeOff
+  Mail, Lock, User, Sparkles, AlertCircle, CheckCircle2, Eye, EyeOff
 } from 'lucide-react';
 
 const LoginSchema = Yup.object().shape({
@@ -45,6 +46,17 @@ function AuthContent() {
     }
   }, [user, navigate]);
 
+  useEffect(() => {
+    const errorParam = searchParams.get('error');
+    if (errorParam) {
+      if (errorParam === 'OAuthCallback') {
+        setError('Google authentication failed. This is typically caused by invalid or mismatched Google Client credentials.');
+      } else {
+        setError(errorParam);
+      }
+    }
+  }, [searchParams]);
+
   const handleTabChange = (tab: 'login' | 'signup') => {
     navigate.push(`/auth?tab=${tab}`);
     setError(null);
@@ -71,9 +83,7 @@ function AuthContent() {
       <div className="w-full max-w-md space-y-8 relative z-10">
         {/* Header */}
         <div className="text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-tr from-indigo-600 to-violet-500 text-white shadow-lg shadow-indigo-500/20">
-            <BrainCircuit className="h-7 w-7" />
-          </div>
+          <Logo className="mx-auto h-12 w-12 transition-transform hover:scale-105" />
           <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             {activeTab === 'login' ? 'Welcome Back!' : 'Create Your Account'}
           </h2>
@@ -152,7 +162,7 @@ function AuthContent() {
                       <Field
                         type="email"
                         name="email"
-                        placeholder="you@example.com"
+                        placeholder="deepanshuthakur172006@gmail.com"
                         className={`w-full rounded-xl border bg-slate-50/50 py-2.5 pl-10 pr-3 text-sm outline-none transition-all dark:bg-slate-950 ${errors.email && touched.email
                             ? 'border-rose-300 focus:border-rose-500 dark:border-rose-800/80 focus:ring-1 focus:ring-rose-500/20'
                             : 'border-slate-200 focus:border-indigo-500 dark:border-slate-800 focus:ring-1 focus:ring-indigo-500/20'
@@ -233,7 +243,7 @@ function AuthContent() {
                       <Field
                         type="text"
                         name="name"
-                        placeholder="John Doe"
+                        placeholder="Deepanshu Thakur"
                         className={`w-full rounded-xl border bg-slate-50/50 py-2.5 pl-10 pr-3 text-sm outline-none transition-all dark:bg-slate-950 ${errors.name && touched.name
                             ? 'border-rose-300 focus:border-rose-500 dark:border-rose-800/80 focus:ring-1 focus:ring-rose-500/20'
                             : 'border-slate-200 focus:border-indigo-500 dark:border-slate-800 focus:ring-1 focus:ring-indigo-500/20'
@@ -254,7 +264,7 @@ function AuthContent() {
                       <Field
                         type="email"
                         name="email"
-                        placeholder="you@example.com"
+                        placeholder="deepanshuthakur172006@gmail.com"
                         className={`w-full rounded-xl border bg-slate-50/50 py-2.5 pl-10 pr-3 text-sm outline-none transition-all dark:bg-slate-950 ${errors.email && touched.email
                             ? 'border-rose-300 focus:border-rose-500 dark:border-rose-800/80 focus:ring-1 focus:ring-rose-500/20'
                             : 'border-slate-200 focus:border-indigo-500 dark:border-slate-800 focus:ring-1 focus:ring-indigo-500/20'
@@ -371,7 +381,7 @@ function AuthContent() {
                 d="M12 23c3.24 0 5.97-1.08 7.96-2.91l-3.62-2.81c-1.1.74-2.51 1.18-4.34 1.18-3.48 0-5.95-1.78-6.83-4.42l-3.78 2.93C3.37 20.35 7.35 23 12 23z"
               />
             </svg>
-            <span>Google Workspace</span>
+            <span className="uppercase">continue with google</span>
           </button>
         </div>
       </div>

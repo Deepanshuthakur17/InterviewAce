@@ -9,7 +9,13 @@ dns.setDefaultResultOrder('ipv4first')
 const connectionString = `${process.env.DATABASE_URL}`
 
 const prismaClientSingleton = () => {
-  const pool = new Pool({ connectionString })
+  const pool = new Pool({ 
+    connectionString,
+    max: 10,
+    idleTimeoutMillis: 10000, // Close idle connections after 10 seconds to help serverless databases
+    connectionTimeoutMillis: 5000, // Timeout after 5 seconds if connection fails
+    maxUses: 100 // Re-create connection after 100 queries
+  })
   const adapter = new PrismaPg(pool)
   return new PrismaClient({ adapter })
 }
